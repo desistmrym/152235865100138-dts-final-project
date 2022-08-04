@@ -67,13 +67,9 @@ const Recepie = () => {
                     </div>
                 ))
                 : (
-                    <div className='w-[20%] bg-white rounded-xl'>
-                        <Link to="/recepie-detail/korean">
-                            <img src={b1} alt="" className='h-[15rem] w-full object-cover rounded-xl rounded-bl-none rounded-br-none' />
-                            <h1 className='pl-5 pt-2 font-bold'>Please Login</h1>
-                            <div className='p-1'>
-                                {/* <hr></hr> */}
-                            </div>
+                    <div className='w-full mt-3 text-center '>
+                        <Link to="/signin">
+                            <button className='p-5 bg-[#FFA113] text-white rounded-lg'>Please Login</button>
                         </Link>
                     </div>
                 )}
