@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../component/Navbar';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 const Create = () => {
     const [name, setName] = useState('');
@@ -68,7 +69,7 @@ const Create = () => {
             category_id: cat,
             contributor_id: id,
             ingredient: ingredientList,
-            steps: stepList,
+            step: stepList,
             estimation: est 
         }
         axios.post(apiUrl, body, {
@@ -80,7 +81,7 @@ const Create = () => {
             console.log(res)
         })
         .catch(err => {
-            console.log(err.response.data)
+            Swal.fire('Error', err.response.data.message, 'error')
         })
     }
 
