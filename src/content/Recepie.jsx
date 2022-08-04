@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import Navbar from '../component/Navbar';
 import soup from '../assets/images/icons/soup.png'
 import { Link } from 'react-router-dom';
+import b1 from '../assets/images/illustration/b1.jpg' 
 
 const Recepie = () => {
+
+    useEffect(() => {
+        // const token = localStorage.getItem('token-recepie')
+    })
     return (
         <div>
             <Navbar />
@@ -21,7 +26,7 @@ const Recepie = () => {
             <div className='flex justify-between w-full p-5 ml-5 mr-5'>
                 <div className='w-[20%] bg-white rounded-xl'>
                     <Link to="/recepie-detail/korean">
-                        <img src="https://i.pinimg.com/564x/8d/c6/e2/8dc6e29bb5956c9a18e334db274d6ffd.jpg" alt="" className='h-[15rem] w-full object-cover rounded-xl rounded-bl-none rounded-br-none' />
+                        <img src={b1} alt="" className='h-[15rem] w-full object-cover rounded-xl rounded-bl-none rounded-br-none' />
                         <h1 className='pl-5 pt-2 font-bold'>Title Recepie</h1>
                         <div className='flex pl-5 pb-2 pt-1'>
                             <div className='bg-[#ffd8c6] rounded-full p-3 relative w-4'></div>

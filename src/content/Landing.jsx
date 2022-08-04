@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import banner1 from '../assets/images/2.png'
 import { Swiper, SwiperSlide } from "swiper/react";
 import Categories from '../content/Categories';
 import { BiRightArrowAlt } from "react-icons/bi";
+import b1 from '../assets/images/illustration/b1.jpg';
+import axios from 'axios';
 
 // Import Swiper styles
 import "swiper/css";
@@ -13,6 +15,20 @@ import { Autoplay, EffectCoverflow } from "swiper";
 import Navbar from '../component/Navbar';
 
 const Landing = () => {
+    const [list, setList] = useState([]);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token-recepie');
+        const apiUrl = process.env.REACT_APP_API_URL + '/recipe'
+        axios.get(apiUrl, {
+            headers: {
+                'X-ACCESS-TOKEN': token
+            }
+        })
+        .then(res => {
+            setList(res.data.data)
+        })
+    })
     return (
         <div>
             <Navbar />
@@ -38,18 +54,21 @@ const Landing = () => {
                     modules={[Autoplay, EffectCoverflow]}
                     className="mySwiper w-[50%] float-right"
                 >
-                    <SwiperSlide className=''>
-                        <div className='bg-white p-5 rounded-xl'>
-                            <img src="https://i.pinimg.com/564x/8d/c6/e2/8dc6e29bb5956c9a18e334db274d6ffd.jpg" alt="" className='h-[15rem] w-full object-cover rounded-xl' />
-                            <h1 className='text-center font-bold pt-3'>Title Recepie</h1>
-                        </div>
-                    </SwiperSlide>
-                    <SwiperSlide className=''>
-                        <div className='bg-white p-5 rounded-xl'>
-                            <img src="https://i.pinimg.com/564x/8d/c6/e2/8dc6e29bb5956c9a18e334db274d6ffd.jpg" alt="" className='h-[15rem] w-full object-cover rounded-xl' />
-                            <h1 className='text-center font-bold pt-3'>Title Recepie</h1>
-                        </div>
-                    </SwiperSlide>
+                    {list.length > 0 ?  list.map((item, i) => (
+                        <SwiperSlide className=''>
+                            <div className='bg-white p-5 rounded-xl'>
+                                <img src={b1} alt="" className='h-[15rem] w-full object-cover rounded-xl' />
+                                <h1 className='text-center font-bold pt-3'>{item.name}</h1>
+                            </div>
+                        </SwiperSlide>
+                    )) : (
+                        <SwiperSlide className=''>
+                            <div className='bg-white p-5 rounded-xl'>
+                                <img src={b1} alt="" className='h-[15rem] w-full object-cover rounded-xl' />
+                                <h1 className='text-center font-bold pt-3'>Please Login</h1>
+                            </div>
+                        </SwiperSlide>
+                    )}
                 </Swiper>
             </div>
             <div className='relative mt-[10%] p-10 ml-[12%]'>
