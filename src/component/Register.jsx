@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
