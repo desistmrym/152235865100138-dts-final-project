@@ -10,6 +10,7 @@ import Detail from './content/Detail';
 import Create from './content/Create';
 import Register from './component/Register';
 import ProtectedRoute from './component/ProtectedRoute';
+import RecepieCategory from './content/RecepieCategory';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           }
         ></Route>
         <Route path="/recepie" element={<Recepie />}></Route>
+        <Route path="/recepie/:category" element={<RecepieCategory />}></Route>
         <Route 
           path="/recepie-detail/:name" 
           element={

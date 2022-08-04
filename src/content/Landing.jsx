@@ -16,9 +16,9 @@ import Navbar from '../component/Navbar';
 
 const Landing = () => {
     const [list, setList] = useState([]);
+    const token = localStorage.getItem('token-recepie');
 
     useEffect(() => {
-        const token = localStorage.getItem('token-recepie');
         const apiUrl = process.env.REACT_APP_API_URL + '/recipe'
         axios.get(apiUrl, {
             headers: {
@@ -28,13 +28,14 @@ const Landing = () => {
         .then(res => {
             setList(res.data.data)
         })
-    })
+    }, [token])
     return (
         <div>
             <Navbar />
             <div className='absolute' style={{backgroundImage: `url(${banner1})`, width: '100%', height: '35rem', backgroundRepeat: 'no-repeat', backgroundSize: '100%'}}></div>
             <div className='relative p-20 pl-10 pr-10 w-full pt-[8%]'>
-                <Swiper
+                {token !== null ? (
+                    <Swiper
                     slidesPerView={2}
                     spaceBetween={30}
                     centeredSlides={true}
@@ -56,23 +57,54 @@ const Landing = () => {
                 >
                     {list.length > 0 ?  list.map((item, i) => (
                         <SwiperSlide className=''>
-                            <div className='bg-white p-5 rounded-xl'>
-                                <img src={b1} alt="" className='h-[15rem] w-full object-cover rounded-xl' />
-                                <h1 className='text-center font-bold pt-3'>{item.name}</h1>
+                            <div className='bg-white mt-5 md:p-5 md:mt-0 rounded-xl'>
+                                <img src={b1} alt="" className='h-[2rem] md:h-[15rem] w-full object-cover rounded-xl' />
+                                <h1 className='text-center font-bold md:pt-3 text-sm md:text-lg'>{item.name}</h1>
                             </div>
                         </SwiperSlide>
                     )) : (
                         <SwiperSlide className=''>
                             <div className='bg-white p-5 rounded-xl'>
-                                <img src={b1} alt="" className='h-[15rem] w-full object-cover rounded-xl' />
-                                <h1 className='text-center font-bold pt-3'>Please Login</h1>
+                            <img src={b1} alt="" className='h-[2rem] md:h-[15rem] w-full object-cover rounded-xl' />
+                                <h1 className='text-center font-bold md:pt-3 text-sm md:text-lg'>Data not available</h1>
                             </div>
                         </SwiperSlide>
                     )}
-                </Swiper>
+                </Swiper>    
+                ) : (
+                    <Swiper
+                        slidesPerView={2}
+                        spaceBetween={30}
+                        centeredSlides={true}
+                        loop={true}
+                        autoplay={{
+                        delay: 5000,
+                        disableOnInteraction: false
+                        }}
+                        navigation={false}
+                        coverflowEffect={{
+                            rotate: 50,
+                            stretch: 0,
+                            depth: 100,
+                            modifier: 1,
+                            slideShadows: true,
+                        }}
+                        modules={[Autoplay, EffectCoverflow]}
+                        className="mySwiper w-[50%] float-right"
+                    >
+                        <SwiperSlide className=''>
+                            <div className='bg-white p-5 rounded-xl'>
+                            <img src={b1} alt="" className='h-[2rem] md:h-[15rem] w-full object-cover rounded-xl' />
+                                <h1 className='text-center font-bold md:pt-3 text-sm md:text-lg'>Please Login</h1>
+                            </div>
+                        </SwiperSlide>
+                    </Swiper>
+                )
+                }
+                
             </div>
-            <div className='relative mt-[10%] p-10 ml-[12%]'>
-                <button className='border border-[#FFA113] bg-[#FFA113] text-white font-bold p-1 px-10 hover:border-white hover:bg-transparent hover:text-[#FFA113] rounded-lg flex'>View More <BiRightArrowAlt className='text-[20px] ml-3 mt-1'></BiRightArrowAlt></button>
+            <div className='relative md:mt-[10%] md:p-10 ml-[12%]'>
+                <button className='border border-[#FFA113] bg-[#FFA113] text-white font-bold p-1 md:px-10 text-xs md:text-md hover:border-white hover:bg-transparent hover:text-[#FFA113] rounded-lg flex'>View More <BiRightArrowAlt className='text-[20px] ml-3 md:mt-1'></BiRightArrowAlt></button>
             </div>
             <div className='relative mt-[1%]'>
                 <Categories />
