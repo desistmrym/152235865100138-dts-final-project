@@ -11,18 +11,23 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const apiUrl = process.env.REACT_APP_API_URL;
 
-const Login = () => {
+const Register = () => {
     const navigate = useNavigate()
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPass] = useState('');
     const [error, setError] = useState('')
 
     const handleSubmit = () => {
         const body = {
+            first_name: firstName,
+            last_name: lastName,
             email: email,
-            password: password
+            password: password,
+            role: 'admin'
         }
-        axios.post(apiUrl+'/login', body).then(res => {
+        axios.post(apiUrl+'/register', body).then(res => {
             const {token, _id} = res.data.data
             localStorage.setItem('token-recepie', token)
             localStorage.setItem('id-contributor', _id)
@@ -61,8 +66,16 @@ const Login = () => {
                     </div>
                     <div className='w-full md:p-5 md:pt-0 text-center mt-10'>
                         <h1 className='text-[#FFA113] font-bold text-2xl'>Welcome to AllRecepie</h1>
-                        <p>Please Sign In to your account.</p>
+                        <p>Please Sign Up to your account.</p>
                         <form className='px-10 mt-5'>
+                            <div className='flex w-full'>
+                                <div className='mt-5 w-[50%] mr-5'>
+                                    <input type="text" className='w-full py-2 border-[#e2ddd9] border-b-2 focus:border-[#FFA113] text-gray-600 outline-none' placeholder='First Name' onChange={(e) => setFirstName(e.target.value)} />
+                                </div>
+                                <div className='mt-5 w-[50%]'>
+                                    <input type="text" className='w-full py-2 border-[#e2ddd9] border-b-2 focus:border-[#FFA113] text-gray-600 outline-none' placeholder='Last Name' onChange={(e) => setLastName(e.target.value)} />
+                                </div>
+                            </div>
                             <div className='mt-5'>
                                 <input type="text" className='w-full py-2 border-[#e2ddd9] border-b-2 focus:border-[#FFA113] text-gray-600 outline-none' placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
                             </div>
@@ -80,7 +93,7 @@ const Login = () => {
                         <div className='mt-2 px-10'>
                             {/* <h1 className='mb-2'>OR</h1> */}
                             {/* <button className='bg-[#FFA113] hover:bg-[#eb8724] p-2 text-white font-bold px-10 w-full rounded-xl flex justify-center'><FcGoogle size="25" className='mr-3'></FcGoogle>Sign In with Google</button> */}
-                            <p className='text-xs mt-2'>Dont have an account? <Link to="/signup"><span className='hover:text-[#FFA113] cursor-pointer'>Sign Up</span></Link></p>
+                            <p className='text-xs mt-2'>Already have an account? <Link to="/signin"><span className='hover:text-[#FFA113] cursor-pointer'>Sign In</span></Link></p>
                         </div>
                     </div>
                 </div>
@@ -89,4 +102,4 @@ const Login = () => {
     )
 };
 
-export default Login;
+export default Register;

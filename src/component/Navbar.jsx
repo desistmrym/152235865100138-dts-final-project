@@ -43,7 +43,7 @@ const Navbar = () => {
                 </Link>
                 {token !== null ? 
                     <>
-                        <Link to='/add-recepie' className={`mt-1 ${param === '/recepie' ? 'text-[#FFA113]' : 'text-black'}`}>
+                        <Link to='/create-recepie' className={`mt-1 ${param === '/recepie' ? 'text-[#FFA113]' : 'text-black'}`}>
                             <li className="mr-5 flex border-r-2 border-[#FFA113] hover:text-white cursor-pointer"><BsJournalPlus size={20} className="pt-1"></BsJournalPlus> <span className="ml-1 mr-3">New Recepie</span></li>
                         </Link>
                         <li className="mr-5 flex hover:text-white cursor-pointer mt-1" onClick={() => handleLogout()}><IoMdLogOut size={20} className="pt-1"></IoMdLogOut> <span className="ml-1 mr-3">Logout</span></li>
