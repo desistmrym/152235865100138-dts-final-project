@@ -13,6 +13,7 @@ import "swiper/css/pagination";
 
 import { Autoplay, EffectCoverflow } from "swiper";
 import Navbar from '../component/Navbar';
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
     const [list, setList] = useState([]);
@@ -104,7 +105,9 @@ const Landing = () => {
                 
             </div>
             <div className='relative md:mt-[10%] md:p-10 ml-[12%]'>
-                <button className='border border-[#FFA113] bg-[#FFA113] text-white font-bold p-1 md:px-10 text-xs md:text-md hover:border-white hover:bg-transparent hover:text-[#FFA113] rounded-lg flex'>View More <BiRightArrowAlt className='text-[20px] ml-3 md:mt-1'></BiRightArrowAlt></button>
+                <Link to="/recepie">
+                    <button className='border border-[#FFA113] bg-[#FFA113] text-white font-bold p-1 md:px-10 text-xs md:text-lg hover:border-white hover:bg-transparent hover:text-[#FFA113] rounded-lg flex'>View More <BiRightArrowAlt className='text-[20px] ml-3 md:mt-1'></BiRightArrowAlt></button>
+                </Link>
             </div>
             <div className='relative mt-[1%]'>
                 <Categories />
